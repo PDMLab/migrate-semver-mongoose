@@ -1,0 +1,8 @@
+version: "2"
+
+services:
+  tenantservicedb:
+    command: mongod
+    image: mongo:3.2.4
+    ports:
+      - "27000:27017"
