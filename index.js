@@ -1,4 +1,5 @@
 'use strict';
+const compareVersions = require('compare-versions');
 const mongoose = require('mongoose');
 const Migration = require('./schemas/migration');
 const path = require('path');
@@ -47,6 +48,20 @@ const mongoosePlugin = function () {
     });
   };
 
+  const getLatestAppliedMigration = function (continueWith) {
+    const abortWith = continueWith;
+
+    MigrationModel.find({}, (err, migrations) => {
+      if (err) {
+        return abortWith(err);
+      }
+      const sortedVersions = migrations.map(migration => migration.version).sort(compareVersions);
+      const latestMigration = sortedVersions[sortedVersions.length - 1];
+
+      return continueWith(null, latestMigration);
+    });
+  };
+
   const addMigrationToMigrationsTable = function (options, continueWith) {
     const migration = new MigrationModel({
       version: options.version,
@@ -67,7 +82,13 @@ const mongoosePlugin = function () {
   };
 
   return {
-    connect, hasMigrationsTable, createMigrationsTable, hasMigration, addMigrationToMigrationsTable, up
+    connect,
+    hasMigrationsTable,
+    createMigrationsTable,
+    hasMigration,
+    getLatestAppliedMigration,
+    addMigrationToMigrationsTable,
+    up
   };
 };
 
