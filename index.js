@@ -20,16 +20,22 @@ const mongoosePlugin = function () {
         return;
       }
 
-      MigrationModel = conn.model('Migration', Migration);
-
       return continueWith(err ? operation.mainError() : null);
     }));
   };
 
+  /**
+   * @param {Object} options
+   * @param {String} options.name
+   * @param continueWith
+   */
   const hasMigrationsTable = function (options, continueWith) {
     const abortWith = continueWith;
 
-    conn.db.listCollections({ name: 'migrations' }).next((err, collinfo) => {
+    config.migrationsCollectionName = options.name;
+    MigrationModel = conn.model(config.migrationsCollectionName, Migration);
+
+    conn.db.listCollections({ name: config.migrationsCollectionName }).next((err, collinfo) => {
       if (err) {
         return abortWith(err);
       }
