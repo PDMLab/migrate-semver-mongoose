@@ -1,5 +1,6 @@
 'use strict';
 const compareVersions = require('compare-versions');
+const moment = require('moment');
 const mongoose = require('mongoose');
 const Migration = require('./schemas/migration');
 const path = require('path');
@@ -82,7 +83,8 @@ const mongoosePlugin = function (pluginOptions) {
   const addMigrationToMigrationsTable = function (options, continueWith) {
     const migration = new MigrationModel({
       version: options.version,
-      direction: options.direction
+      direction: options.direction,
+      dateApplied: moment.utc()
     });
 
     migration.save(err => {

@@ -9,6 +9,10 @@ const Migration = new mongoose.Schema({
   direction: {
     type: String,
     required: true
+  },
+  dateApplied: {
+    type: Date,
+    require: true
   }
 });
 
