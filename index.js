@@ -6,11 +6,24 @@ const path = require('path');
 const retry = require('retry');
 
 let MigrationModel;
-const config = {};
+const config = {
+  migrationsCollectionName: 'migrations'
+};
 let conn;
 
 mongoose.Promise = global.Promise;
-const mongoosePlugin = function () {
+
+/**
+ *
+ * @param {Object} [pluginOptions]
+ * @param {String} [pluginOptions.migrationsCollectionName]
+ * @returns {{connect: connect, hasMigrationsTable: hasMigrationsTable, createMigrationsTable: createMigrationsTable, hasMigration: hasMigration, getLatestAppliedMigration: getLatestAppliedMigration, addMigrationToMigrationsTable: addMigrationToMigrationsTable, up: up}}
+ */
+const mongoosePlugin = function (pluginOptions) {
+  if (pluginOptions && pluginOptions.migrationsCollectionName) {
+    config.migrationsCollectionName = pluginOptions.migrationsCollectionName;
+  }
+
   const connect = function (options, continueWith) {
     config.mongoServer = options.mongoServer;
     const operation = retry.operation();
@@ -26,13 +39,11 @@ const mongoosePlugin = function () {
 
   /**
    * @param {Object} options
-   * @param {String} options.name
    * @param continueWith
    */
   const hasMigrationsTable = function (options, continueWith) {
     const abortWith = continueWith;
 
-    config.migrationsCollectionName = options.name;
     MigrationModel = conn.model(config.migrationsCollectionName, Migration);
 
     conn.db.listCollections({ name: config.migrationsCollectionName }).next((err, collinfo) => {

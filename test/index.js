@@ -481,9 +481,8 @@ describe('Migrations with custom migrations collection name', () => {
       const version = '0.1.0';
       const migrationsDirectory = path.join(__dirname, 'migrations', 'none-0.1.0');
       const migrateSemVer = new SemVerMigration({
-        migrationsDirectory,
-        migrationsTableName: customCollectionName
-      }, mongoosePlugin());
+        migrationsDirectory
+      }, mongoosePlugin({ migrationsCollectionName: customCollectionName }));
 
       migrateSemVer.connect({ mongoServer: 'mongodb://localhost:27000/test' }, err => { // eslint-disable-line
         migrateSemVer.up({ version }, err => { // eslint-disable-line
@@ -503,9 +502,8 @@ describe('Migrations with custom migrations collection name', () => {
       const version = '0.1.0';
       const migrationsDirectory = path.join(__dirname, 'migrations', 'none-0.1.0');
       const migrateSemVer = new SemVerMigration({
-        migrationsDirectory,
-        migrationsTableName: customCollectionName
-      }, mongoosePlugin());
+        migrationsDirectory
+      }, mongoosePlugin({ migrationsCollectionName: customCollectionName }));
 
       migrateSemVer.connect({ mongoServer: 'mongodb://localhost:27000/test' }, err => { // eslint-disable-line
         migrateSemVer.up({ version }, err => { // eslint-disable-line
@@ -527,9 +525,8 @@ describe('Migrations with custom migrations collection name', () => {
       const version = '0.2.0';
       const migrationsDirectory = path.join(__dirname, 'migrations', 'none-0.2.0');
       const migrateSemVer = new SemVerMigration({
-        migrationsDirectory,
-        migrationsTableName: customCollectionName
-      }, mongoosePlugin());
+        migrationsDirectory
+      }, mongoosePlugin({ migrationsCollectionName: customCollectionName }));
 
       migrateSemVer.connect({ mongoServer: 'mongodb://localhost:27000/test' }, err => { // eslint-disable-line
         migrateSemVer.up({ version }, err => { // eslint-disable-line
@@ -550,9 +547,8 @@ describe('Migrations with custom migrations collection name', () => {
       const version = '0.2.0';
       const migrationsDirectory = path.join(__dirname, 'migrations', 'none-0.2.0');
       const migrateSemVer = new SemVerMigration({
-        migrationsDirectory,
-        migrationsTableName: customCollectionName
-      }, mongoosePlugin());
+        migrationsDirectory
+      }, mongoosePlugin({ migrationsCollectionName: customCollectionName }));
 
       migrateSemVer.connect({ mongoServer: 'mongodb://localhost:27000/test' }, err => { // eslint-disable-line
         migrateSemVer.up({ version }, err => { // eslint-disable-line
@@ -589,9 +585,8 @@ describe('Migrations with custom migrations collection name', () => {
       let version = '0.1.0';
       const migrationsDirectory = path.join(__dirname, 'migrations', 'none-0.1.0-0.2.0');
       const migrateSemVer = new SemVerMigration({
-        migrationsDirectory,
-        migrationsTableName: customCollectionName
-      }, mongoosePlugin());
+        migrationsDirectory
+      }, mongoosePlugin({ migrationsCollectionName: customCollectionName }));
 
       migrateSemVer.connect({ mongoServer: 'mongodb://localhost:27000/test' }, err => { // eslint-disable-line
         migrateSemVer.up({ version }, err => { // eslint-disable-line
@@ -617,9 +612,8 @@ describe('Migrations with custom migrations collection name', () => {
       let version = '0.1.0';
       const migrationsDirectory = path.join(__dirname, 'migrations', 'none-0.1.0-0.2.0');
       const migrateSemVer = new SemVerMigration({
-        migrationsDirectory,
-        migrationsTableName: customCollectionName
-      }, mongoosePlugin());
+        migrationsDirectory
+      }, mongoosePlugin({ migrationsCollectionName: customCollectionName }));
 
       migrateSemVer.connect({ mongoServer: 'mongodb://localhost:27000/test' }, err => { // eslint-disable-line
         migrateSemVer.up({ version }, err => { // eslint-disable-line
@@ -665,9 +659,8 @@ describe('Migrations with custom migrations collection name', () => {
       let version = '0.1.0';
       const migrationsDirectory = path.join(__dirname, 'migrations', 'none-0.1.0-0.3.0');
       const migrateSemVer = new SemVerMigration({
-        migrationsDirectory,
-        migrationsTableName: customCollectionName
-      }, mongoosePlugin());
+        migrationsDirectory
+      }, mongoosePlugin({ migrationsCollectionName: customCollectionName }));
 
       migrateSemVer.connect({ mongoServer: 'mongodb://localhost:27000/test' }, err => { // eslint-disable-line
         migrateSemVer.up({ version }, err => { // eslint-disable-line
@@ -694,9 +687,8 @@ describe('Migrations with custom migrations collection name', () => {
       let version = '0.1.0';
       const migrationsDirectory = path.join(__dirname, 'migrations', 'none-0.1.0-0.3.0');
       const migrateSemVer = new SemVerMigration({
-        migrationsDirectory,
-        migrationsTableName: customCollectionName
-      }, mongoosePlugin());
+        migrationsDirectory
+      }, mongoosePlugin({ migrationsCollectionName: customCollectionName }));
 
       migrateSemVer.connect({ mongoServer: 'mongodb://localhost:27000/test' }, err => { // eslint-disable-line
         migrateSemVer.up({ version }, err => { // eslint-disable-line
@@ -743,9 +735,8 @@ describe('Migrations with custom migrations collection name', () => {
       let version = '0.2.0';
       const migrationsDirectory = path.join(__dirname, 'migrations', 'none-0.2.0-0.3.0');
       const migrateSemVer = new SemVerMigration({
-        migrationsDirectory,
-        migrationsTableName: customCollectionName
-      }, mongoosePlugin());
+        migrationsDirectory
+      }, mongoosePlugin({ migrationsCollectionName: customCollectionName }));
 
       migrateSemVer.connect({ mongoServer: 'mongodb://localhost:27000/test' }, err => { // eslint-disable-line
         migrateSemVer.up({ version }, err => { // eslint-disable-line
@@ -772,9 +763,8 @@ describe('Migrations with custom migrations collection name', () => {
       let version = '0.2.0';
       const migrationsDirectory = path.join(__dirname, 'migrations', 'none-0.2.0-0.3.0');
       const migrateSemVer = new SemVerMigration({
-        migrationsDirectory,
-        migrationsTableName: customCollectionName
-      }, mongoosePlugin());
+        migrationsDirectory
+      }, mongoosePlugin({ migrationsCollectionName: customCollectionName }));
 
       migrateSemVer.connect({ mongoServer: 'mongodb://localhost:27000/test' }, err => { // eslint-disable-line
         migrateSemVer.up({ version }, err => { // eslint-disable-line
@@ -829,9 +819,8 @@ describe('Migrations with custom migrations collection name', () => {
       let version = '0.1.0';
       const migrationsDirectory = path.join(__dirname, 'migrations', 'none-0.1.0-0.2.0-0.3.0');
       const migrateSemVer = new SemVerMigration({
-        migrationsDirectory,
-        migrationsTableName: customCollectionName
-      }, mongoosePlugin());
+        migrationsDirectory
+      }, mongoosePlugin({ migrationsCollectionName: customCollectionName }));
 
       migrateSemVer.connect({ mongoServer: 'mongodb://localhost:27000/test' }, err => { // eslint-disable-line
         migrateSemVer.up({ version }, err => { // eslint-disable-line
@@ -865,9 +854,8 @@ describe('Migrations with custom migrations collection name', () => {
       let version = '0.1.0';
       const migrationsDirectory = path.join(__dirname, 'migrations', 'none-0.1.0-0.2.0-0.3.0');
       const migrateSemVer = new SemVerMigration({
-        migrationsDirectory,
-        migrationsTableName: customCollectionName
-      }, mongoosePlugin());
+        migrationsDirectory
+      }, mongoosePlugin({ migrationsCollectionName: customCollectionName }));
 
       migrateSemVer.connect({ mongoServer: 'mongodb://localhost:27000/test' }, err => { // eslint-disable-line
         migrateSemVer.up({ version }, err => { // eslint-disable-line
