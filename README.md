@@ -1,6 +1,6 @@
 # MongoDb migrations using mongoose and migrate-semver
 
-`migrate-semver-mongoose` is plugin for [migrate-semver](https://github.com/PDMLab/migrate-semver) allowing you to do migrations based on [SemVer](http://semver.org/) and [mongoose](http://mongoosejs.com).
+`migrate-semver-mongoose` is a plugin for [migrate-semver](https://github.com/PDMLab/migrate-semver) allowing you to do migrations based on [SemVer](http://semver.org/) and [mongoose](http://mongoosejs.com).
 
 ## Installation
 
