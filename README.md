@@ -1,6 +1,6 @@
 # MongoDb migrations using mongoose and migrate-semver
 
-`migrate-semver-mongoose` is plugin for [migrate-semver](https://github.com/PDMLab/migrate-semver) to allowing you to do migrations based on [SemVer](http://semver.org/) and [mongoose](http://mongoosejs.com).
+`migrate-semver-mongoose` is plugin for [migrate-semver](https://github.com/PDMLab/migrate-semver) allowing you to do migrations based on [SemVer](http://semver.org/) and [mongoose](http://mongoosejs.com).
 
 ## Installation
 
@@ -12,6 +12,7 @@ npm install --save migrate-semver-mongoose
 ## Usage
 
 `migrate-semver` just handles the heavy lifting of finding the viable migrations to run based on a SemVer compliant version string passed into it.
+The parts specific to MongoDb / Mongoose are handled by `migrate-semver-mongoose`.
 
 The following example runs a migration for version `0.3.0`.
 
@@ -54,6 +55,37 @@ The file and folder structure has to follow this convention (the `index-up.js` c
   - 0.3.0 
     - index-up.js
 </pre>
+
+The `index-up.js` could look like this:
+
+```js
+'use strict';
+const CustomerSchema = require('./schemas/customer');
+
+/**
+ * @param {Object} options
+ * @param {Object} options.conn
+ * @param {Object} options.model
+ * @param continueWith
+ */
+const up = function (options, callback) {
+  const conn = options.conn;
+  const Customer = conn.model('Customer', CustomerSchema);
+  const customer = new Customer({
+    name: 'PDMLab'
+  });
+
+  customer.save(err => {
+    callback(err);
+  });
+};
+
+module.exports = {
+  up
+};
+```
+
+As you can see, you get passed a `mongoose` connection instance so you don't mess with the `mongoose` default instance.
 
 The default name of the collection where the applied migrations are stored is `migrations`. You can change it by passing a different name into the plugin ctor function:
 
