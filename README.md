@@ -25,9 +25,13 @@ const migrateSemVer = new SemVerMigration({ migrationsDirectory }, mongoosePlugi
 const version = '0.3.0';
 
 migrateSemVer.connect({ mongoServer: 'mongodb://localhost:27017/test' }, err => { 
-  migrateSemVer.up({ version }, err => {
-    console.log('done');
-  });
+  migrateSemVer.canMigrate({ version }, (err, canMigrate) => {
+    if (canMigrate) {
+      migrateSemVer.up({ version }, err => {
+        console.log('done');
+      });
+    }
+  })
 });
 ```
 
