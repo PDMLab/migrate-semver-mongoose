@@ -65,11 +65,11 @@ describe('Migrations', () => {
       const migrateSemVer = new SemVerMigration({ migrationsDirectory }, mongoosePlugin());
 
       migrateSemVer.connect({ mongoServer: 'mongodb://localhost:27000/test' }, err => { // eslint-disable-line
-        migrateSemVer.up({ version }, err => { // eslint-disable-line
+        migrateSemVer.up({ version, customOptions: { customName: 'Google'} }, err => { // eslint-disable-line
           const conn = mongoose.createConnection('mongodb://localhost:27000/test', err => { // eslint-disable-line
             const Customer = conn.model('Customer', CustomerSchema);
 
-            Customer.findOne({ name: 'PDMLab' }, (err, customer) => { // eslint-disable-line
+            Customer.findOne({ name: 'Google' }, (err, customer) => { // eslint-disable-line
               assert.notEqual(null, customer);
               done();
             });

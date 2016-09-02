@@ -97,7 +97,7 @@ const mongoosePlugin = function (pluginOptions) {
     const migrationPath = path.join(migrationsDirectory, options.version, 'index-up');
     const migration = require(migrationPath); // eslint-disable-line
 
-    migration.up({ conn, model: MigrationModel }, continueWith);
+    migration.up({ conn, model: MigrationModel, customOptions: options.customOptions }, continueWith);
   };
 
   return {

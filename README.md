@@ -70,6 +70,7 @@ const CustomerSchema = require('./schemas/customer');
  * @param {Object} options
  * @param {Object} options.conn
  * @param {Object} options.model
+ * @param {Object} options.customOptions
  * @param continueWith
  */
 const up = function (options, callback) {
@@ -91,11 +92,62 @@ module.exports = {
 
 As you can see, you get passed a `mongoose` connection instance so you don't mess with the `mongoose` default instance.
 
+### customCollectionName
+
 The default name of the collection where the applied migrations are stored is `migrations`. You can change it by passing a different name into the plugin ctor function:
 
 ```js
 const customCollectionName = 'custom.migrations';
 mongoosePlugin({ migrationsCollectionName: customCollectionName })
+```
+
+### customOptions
+
+You can pass custom options to the `up` function as child object of the `options` parameter.
+These `customOptions` will be passed into `migrate-semver-mongoose` which handles them appropriately and they'll be passed into every migration as a child object of the `up` functions `options`.
+
+Passing the options to `migrate-semver`:
+ 
+```js
+const customOptions =  { customName: 'Google' };
+migrateSemVer.up({ version, customOptions }, err => {
+  const Customer = conn.model('Customer', CustomerSchema);
+  
+  Customer.findOne({ name: 'Google' }, (err, customer) => { 
+    assert.notEqual(null, customer);
+    done();
+  });
+});
+```
+
+The migration itself:
+
+```js
+/**
+ * @param {Object} options
+ * @param {Object} options.conn
+ * @param {Object} options.model
+ * @param {Object} [options.customOptions]
+ * @param continueWith
+ */
+const up = function (options, continueWith) {
+  let name = 'PDMLab';
+
+  if (options.customOptions) {
+    name = options.customOptions.customName;
+  }
+  const conn = options.conn;
+  const Customer = conn.model('Customer', CustomerSchema);
+  const customer = new Customer({ name });
+
+  customer.save(err => {
+    continueWith(err);
+  });
+};
+
+module.exports = {
+  up
+};
 ```
  
 ## Running the tests
