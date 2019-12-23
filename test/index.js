@@ -16,7 +16,9 @@ describe('Migrations', () => {
     await compose.kill({ cwd: __dirname })
     await compose.rm({ cwd: __dirname })
     await compose.upAll({ cwd: __dirname })
-    });
+  });
+
+  afterEach(() => mongoose.disconnect())
 
   describe('When connecting to a db via plugin', () => {
     it('should call connect via plugin', done => {
@@ -37,7 +39,7 @@ describe('Migrations', () => {
 
       migrateSemVer.connect({ mongoServer: 'mongodb://localhost:27000/test' }, err => { // eslint-disable-line
         migrateSemVer.up({ version }, err => { // eslint-disable-line
-          const conn = mongoose.createConnection('mongodb://localhost:27000/test', err => { // eslint-disable-line
+          const conn = mongoose.createConnection('mongodb://localhost:27000/test', {useNewUrlParser: true, useUnifiedTopology: true}, err => { // eslint-disable-line
             const MigrationModel = conn.model('Migration', Migration);
 
             MigrationModel.findOne({ version: '0.1.0', direction: 'up' }, (err, migration) => { // eslint-disable-line
@@ -56,7 +58,7 @@ describe('Migrations', () => {
 
       migrateSemVer.connect({ mongoServer: 'mongodb://localhost:27000/test' }, err => { // eslint-disable-line
         migrateSemVer.up({ version, customOptions: { customName: 'Google'} }, err => { // eslint-disable-line
-          const conn = mongoose.createConnection('mongodb://localhost:27000/test', err => { // eslint-disable-line
+          const conn = mongoose.createConnection('mongodb://localhost:27000/test', {useNewUrlParser: true, useUnifiedTopology: true}, err => { // eslint-disable-line
             const Customer = conn.model('Customer', CustomerSchema);
 
             Customer.findOne({ name: 'Google' }, (err, customer) => { // eslint-disable-line
@@ -77,7 +79,7 @@ describe('Migrations', () => {
 
       migrateSemVer.connect({ mongoServer: 'mongodb://localhost:27000/test' }, err => { // eslint-disable-line
         migrateSemVer.up({ version }, err => { // eslint-disable-line
-          const conn = mongoose.createConnection('mongodb://localhost:27000/test', err => { // eslint-disable-line
+          const conn = mongoose.createConnection('mongodb://localhost:27000/test', {useNewUrlParser: true, useUnifiedTopology: true}, err => { // eslint-disable-line
             const MigrationModel = conn.model('Migration', Migration);
 
             MigrationModel.find({}, (err, migrations) => { // eslint-disable-line
@@ -97,7 +99,7 @@ describe('Migrations', () => {
 
       migrateSemVer.connect({ mongoServer: 'mongodb://localhost:27000/test' }, err => { // eslint-disable-line
         migrateSemVer.up({ version }, err => { // eslint-disable-line
-          const conn = mongoose.createConnection('mongodb://localhost:27000/test', err => { // eslint-disable-line
+          const conn = mongoose.createConnection('mongodb://localhost:27000/test', {useNewUrlParser: true, useUnifiedTopology: true}, err => { // eslint-disable-line
 
             async.parallel([
               awaits => {
@@ -133,7 +135,7 @@ describe('Migrations', () => {
 
       migrateSemVer.connect({ mongoServer: 'mongodb://localhost:27000/test' }, err => { // eslint-disable-line
         migrateSemVer.up({ version }, err => { // eslint-disable-line
-          const conn = mongoose.createConnection('mongodb://localhost:27000/test', err => { // eslint-disable-line
+          const conn = mongoose.createConnection('mongodb://localhost:27000/test', {useNewUrlParser: true, useUnifiedTopology: true}, err => { // eslint-disable-line
             const MigrationModel = conn.model('Migration', Migration);
 
             MigrationModel.find({}, (err, migrations) => { // eslint-disable-line
@@ -158,7 +160,7 @@ describe('Migrations', () => {
 
       migrateSemVer.connect({ mongoServer: 'mongodb://localhost:27000/test' }, err => { // eslint-disable-line
         migrateSemVer.up({ version }, err => { // eslint-disable-line
-          const conn = mongoose.createConnection('mongodb://localhost:27000/test', err => { // eslint-disable-line
+          const conn = mongoose.createConnection('mongodb://localhost:27000/test', {useNewUrlParser: true, useUnifiedTopology: true}, err => { // eslint-disable-line
 
             async.parallel([
               awaits => {
@@ -172,7 +174,7 @@ describe('Migrations', () => {
             ], err => { // eslint-disable-line
               version = '0.2.0';
               migrateSemVer.up({ version }, err => { // eslint-disable-line
-                const conn = mongoose.createConnection('mongodb://localhost:27000/test', err => { // eslint-disable-line
+                const conn = mongoose.createConnection('mongodb://localhost:27000/test', {useNewUrlParser: true, useUnifiedTopology: true}, err => { // eslint-disable-line
 
                   async.parallel([
                     awaits => {
@@ -203,7 +205,7 @@ describe('Migrations', () => {
 
       migrateSemVer.connect({ mongoServer: 'mongodb://localhost:27000/test' }, err => { // eslint-disable-line
         migrateSemVer.up({ version }, err => { // eslint-disable-line
-          const conn = mongoose.createConnection('mongodb://localhost:27000/test', err => { // eslint-disable-line
+          const conn = mongoose.createConnection('mongodb://localhost:27000/test', {useNewUrlParser: true, useUnifiedTopology: true}, err => { // eslint-disable-line
             const MigrationModel = conn.model('Migration', Migration);
 
             MigrationModel.find({}, (err, migrations) => { // eslint-disable-line
@@ -229,7 +231,7 @@ describe('Migrations', () => {
 
       migrateSemVer.connect({ mongoServer: 'mongodb://localhost:27000/test' }, err => { // eslint-disable-line
         migrateSemVer.up({ version }, err => { // eslint-disable-line
-          const conn = mongoose.createConnection('mongodb://localhost:27000/test', err => { // eslint-disable-line
+          const conn = mongoose.createConnection('mongodb://localhost:27000/test', {useNewUrlParser: true, useUnifiedTopology: true}, err => { // eslint-disable-line
 
             async.parallel([
               awaits => {
@@ -243,7 +245,7 @@ describe('Migrations', () => {
             ], err => { // eslint-disable-line
               version = '0.3.0';
               migrateSemVer.up({ version }, err => { // eslint-disable-line
-                const conn = mongoose.createConnection('mongodb://localhost:27000/test', err => { // eslint-disable-line
+                const conn = mongoose.createConnection('mongodb://localhost:27000/test', {useNewUrlParser: true, useUnifiedTopology: true}, err => { // eslint-disable-line
 
                   async.parallel([
                     awaits => {
@@ -275,7 +277,7 @@ describe('Migrations', () => {
 
       migrateSemVer.connect({ mongoServer: 'mongodb://localhost:27000/test' }, err => { // eslint-disable-line
         migrateSemVer.up({ version }, err => { // eslint-disable-line
-          const conn = mongoose.createConnection('mongodb://localhost:27000/test', err => { // eslint-disable-line
+          const conn = mongoose.createConnection('mongodb://localhost:27000/test', {useNewUrlParser: true, useUnifiedTopology: true}, err => { // eslint-disable-line
             const MigrationModel = conn.model('Migration', Migration);
 
             MigrationModel.find({}, (err, migrations) => { // eslint-disable-line
@@ -301,7 +303,7 @@ describe('Migrations', () => {
 
       migrateSemVer.connect({ mongoServer: 'mongodb://localhost:27000/test' }, err => { // eslint-disable-line
         migrateSemVer.up({ version }, err => { // eslint-disable-line
-          const conn = mongoose.createConnection('mongodb://localhost:27000/test', err => { // eslint-disable-line
+          const conn = mongoose.createConnection('mongodb://localhost:27000/test', {useNewUrlParser: true, useUnifiedTopology: true}, err => { // eslint-disable-line
 
             async.parallel([
               awaits => {
@@ -324,7 +326,7 @@ describe('Migrations', () => {
             ], err => { // eslint-disable-line
               version = '0.3.0';
               migrateSemVer.up({ version }, err => { // eslint-disable-line
-                const conn = mongoose.createConnection('mongodb://localhost:27000/test', err => { // eslint-disable-line
+                const conn = mongoose.createConnection('mongodb://localhost:27000/test', {useNewUrlParser: true, useUnifiedTopology: true}, err => { // eslint-disable-line
 
                   async.parallel([
                     awaits => {
@@ -355,7 +357,7 @@ describe('Migrations', () => {
 
       migrateSemVer.connect({ mongoServer: 'mongodb://localhost:27000/test' }, err => { // eslint-disable-line
         migrateSemVer.up({ version }, err => { // eslint-disable-line
-          const conn = mongoose.createConnection('mongodb://localhost:27000/test', err => { // eslint-disable-line
+          const conn = mongoose.createConnection('mongodb://localhost:27000/test', {useNewUrlParser: true, useUnifiedTopology: true}, err => { // eslint-disable-line
             const MigrationModel = conn.model('Migration', Migration);
 
             MigrationModel.find({}, (err, migrations) => { // eslint-disable-line
@@ -388,7 +390,7 @@ describe('Migrations', () => {
 
       migrateSemVer.connect({ mongoServer: 'mongodb://localhost:27000/test' }, err => { // eslint-disable-line
         migrateSemVer.up({ version }, err => { // eslint-disable-line
-          const conn = mongoose.createConnection('mongodb://localhost:27000/test', err => { // eslint-disable-line
+          const conn = mongoose.createConnection('mongodb://localhost:27000/test', {useNewUrlParser: true, useUnifiedTopology: true}, err => { // eslint-disable-line
 
             async.parallel([
               awaits => {
@@ -445,6 +447,8 @@ describe('Migrations with custom migrations collection name', () => {
     await compose.upAll({ cwd: __dirname })
   });
 
+  afterEach(() => mongoose.disconnect())
+
   describe('When connecting to a db via plugin', () => {
     it('should call connect via plugin', done => {
       const migrateSemVer = new SemVerMigration({}, mongoosePlugin());
@@ -466,7 +470,7 @@ describe('Migrations with custom migrations collection name', () => {
 
       migrateSemVer.connect({ mongoServer: 'mongodb://localhost:27000/test' }, err => { // eslint-disable-line
         migrateSemVer.up({ version }, err => { // eslint-disable-line
-          const conn = mongoose.createConnection('mongodb://localhost:27000/test', err => { // eslint-disable-line
+          const conn = mongoose.createConnection('mongodb://localhost:27000/test', {useNewUrlParser: true, useUnifiedTopology: true}, err => { // eslint-disable-line
             const MigrationModel = conn.model(customCollectionName, Migration);
 
             MigrationModel.findOne({ version: '0.1.0', direction: 'up' }, (err, migration) => { // eslint-disable-line
@@ -487,7 +491,7 @@ describe('Migrations with custom migrations collection name', () => {
 
       migrateSemVer.connect({ mongoServer: 'mongodb://localhost:27000/test' }, err => { // eslint-disable-line
         migrateSemVer.up({ version }, err => { // eslint-disable-line
-          const conn = mongoose.createConnection('mongodb://localhost:27000/test', err => { // eslint-disable-line
+          const conn = mongoose.createConnection('mongodb://localhost:27000/test', {useNewUrlParser: true, useUnifiedTopology: true}, err => { // eslint-disable-line
             const Customer = conn.model('Customer', CustomerSchema);
 
             Customer.findOne({ name: 'PDMLab' }, (err, customer) => { // eslint-disable-line
@@ -510,7 +514,7 @@ describe('Migrations with custom migrations collection name', () => {
 
       migrateSemVer.connect({ mongoServer: 'mongodb://localhost:27000/test' }, err => { // eslint-disable-line
         migrateSemVer.up({ version }, err => { // eslint-disable-line
-          const conn = mongoose.createConnection('mongodb://localhost:27000/test', err => { // eslint-disable-line
+          const conn = mongoose.createConnection('mongodb://localhost:27000/test', {useNewUrlParser: true, useUnifiedTopology: true}, err => { // eslint-disable-line
             const MigrationModel = conn.model(customCollectionName, Migration);
 
             MigrationModel.find({}, (err, migrations) => { // eslint-disable-line
@@ -532,7 +536,7 @@ describe('Migrations with custom migrations collection name', () => {
 
       migrateSemVer.connect({ mongoServer: 'mongodb://localhost:27000/test' }, err => { // eslint-disable-line
         migrateSemVer.up({ version }, err => { // eslint-disable-line
-          const conn = mongoose.createConnection('mongodb://localhost:27000/test', err => { // eslint-disable-line
+          const conn = mongoose.createConnection('mongodb://localhost:27000/test', {useNewUrlParser: true, useUnifiedTopology: true}, err => { // eslint-disable-line
 
             async.parallel([
               awaits => {
@@ -570,7 +574,7 @@ describe('Migrations with custom migrations collection name', () => {
 
       migrateSemVer.connect({ mongoServer: 'mongodb://localhost:27000/test' }, err => { // eslint-disable-line
         migrateSemVer.up({ version }, err => { // eslint-disable-line
-          const conn = mongoose.createConnection('mongodb://localhost:27000/test', err => { // eslint-disable-line
+          const conn = mongoose.createConnection('mongodb://localhost:27000/test', {useNewUrlParser: true, useUnifiedTopology: true}, err => { // eslint-disable-line
             const MigrationModel = conn.model(customCollectionName, Migration);
 
             MigrationModel.find({}, (err, migrations) => { // eslint-disable-line
@@ -597,7 +601,7 @@ describe('Migrations with custom migrations collection name', () => {
 
       migrateSemVer.connect({ mongoServer: 'mongodb://localhost:27000/test' }, err => { // eslint-disable-line
         migrateSemVer.up({ version }, err => { // eslint-disable-line
-          const conn = mongoose.createConnection('mongodb://localhost:27000/test', err => { // eslint-disable-line
+          const conn = mongoose.createConnection('mongodb://localhost:27000/test', {useNewUrlParser: true, useUnifiedTopology: true}, err => { // eslint-disable-line
 
             async.parallel([
               awaits => {
@@ -611,7 +615,7 @@ describe('Migrations with custom migrations collection name', () => {
             ], err => { // eslint-disable-line
               version = '0.2.0';
               migrateSemVer.up({ version }, err => { // eslint-disable-line
-                const conn = mongoose.createConnection('mongodb://localhost:27000/test', err => { // eslint-disable-line
+                const conn = mongoose.createConnection('mongodb://localhost:27000/test', {useNewUrlParser: true, useUnifiedTopology: true}, err => { // eslint-disable-line
 
                   async.parallel([
                     awaits => {
@@ -644,7 +648,7 @@ describe('Migrations with custom migrations collection name', () => {
 
       migrateSemVer.connect({ mongoServer: 'mongodb://localhost:27000/test' }, err => { // eslint-disable-line
         migrateSemVer.up({ version }, err => { // eslint-disable-line
-          const conn = mongoose.createConnection('mongodb://localhost:27000/test', err => { // eslint-disable-line
+          const conn = mongoose.createConnection('mongodb://localhost:27000/test', {useNewUrlParser: true, useUnifiedTopology: true}, err => { // eslint-disable-line
             const MigrationModel = conn.model(customCollectionName, Migration);
 
             MigrationModel.find({}, (err, migrations) => { // eslint-disable-line
@@ -672,7 +676,7 @@ describe('Migrations with custom migrations collection name', () => {
 
       migrateSemVer.connect({ mongoServer: 'mongodb://localhost:27000/test' }, err => { // eslint-disable-line
         migrateSemVer.up({ version }, err => { // eslint-disable-line
-          const conn = mongoose.createConnection('mongodb://localhost:27000/test', err => { // eslint-disable-line
+          const conn = mongoose.createConnection('mongodb://localhost:27000/test', {useNewUrlParser: true, useUnifiedTopology: true}, err => { // eslint-disable-line
 
             async.parallel([
               awaits => {
@@ -686,7 +690,7 @@ describe('Migrations with custom migrations collection name', () => {
             ], err => { // eslint-disable-line
               version = '0.3.0';
               migrateSemVer.up({ version }, err => { // eslint-disable-line
-                const conn = mongoose.createConnection('mongodb://localhost:27000/test', err => { // eslint-disable-line
+                const conn = mongoose.createConnection('mongodb://localhost:27000/test', {useNewUrlParser: true, useUnifiedTopology: true}, err => { // eslint-disable-line
 
                   async.parallel([
                     awaits => {
@@ -720,7 +724,7 @@ describe('Migrations with custom migrations collection name', () => {
 
       migrateSemVer.connect({ mongoServer: 'mongodb://localhost:27000/test' }, err => { // eslint-disable-line
         migrateSemVer.up({ version }, err => { // eslint-disable-line
-          const conn = mongoose.createConnection('mongodb://localhost:27000/test', err => { // eslint-disable-line
+          const conn = mongoose.createConnection('mongodb://localhost:27000/test', {useNewUrlParser: true, useUnifiedTopology: true}, err => { // eslint-disable-line
             const MigrationModel = conn.model(customCollectionName, Migration);
 
             MigrationModel.find({}, (err, migrations) => { // eslint-disable-line
@@ -748,7 +752,7 @@ describe('Migrations with custom migrations collection name', () => {
 
       migrateSemVer.connect({ mongoServer: 'mongodb://localhost:27000/test' }, err => { // eslint-disable-line
         migrateSemVer.up({ version }, err => { // eslint-disable-line
-          const conn = mongoose.createConnection('mongodb://localhost:27000/test', err => { // eslint-disable-line
+          const conn = mongoose.createConnection('mongodb://localhost:27000/test', {useNewUrlParser: true, useUnifiedTopology: true}, err => { // eslint-disable-line
 
             async.parallel([
               awaits => {
@@ -771,7 +775,7 @@ describe('Migrations with custom migrations collection name', () => {
             ], err => { // eslint-disable-line
               version = '0.3.0';
               migrateSemVer.up({ version }, err => { // eslint-disable-line
-                const conn = mongoose.createConnection('mongodb://localhost:27000/test', err => { // eslint-disable-line
+                const conn = mongoose.createConnection('mongodb://localhost:27000/test', {useNewUrlParser: true, useUnifiedTopology: true}, err => { // eslint-disable-line
 
                   async.parallel([
                     awaits => {
@@ -804,7 +808,7 @@ describe('Migrations with custom migrations collection name', () => {
 
       migrateSemVer.connect({ mongoServer: 'mongodb://localhost:27000/test' }, err => { // eslint-disable-line
         migrateSemVer.up({ version }, err => { // eslint-disable-line
-          const conn = mongoose.createConnection('mongodb://localhost:27000/test', err => { // eslint-disable-line
+          const conn = mongoose.createConnection('mongodb://localhost:27000/test', {useNewUrlParser: true, useUnifiedTopology: true}, err => { // eslint-disable-line
             const MigrationModel = conn.model(customCollectionName, Migration);
 
             MigrationModel.find({}, (err, migrations) => { // eslint-disable-line
@@ -839,7 +843,7 @@ describe('Migrations with custom migrations collection name', () => {
 
       migrateSemVer.connect({ mongoServer: 'mongodb://localhost:27000/test' }, err => { // eslint-disable-line
         migrateSemVer.up({ version }, err => { // eslint-disable-line
-          const conn = mongoose.createConnection('mongodb://localhost:27000/test', err => { // eslint-disable-line
+          const conn = mongoose.createConnection('mongodb://localhost:27000/test', {useNewUrlParser: true, useUnifiedTopology: true}, err => { // eslint-disable-line
 
             async.parallel([
               awaits => {

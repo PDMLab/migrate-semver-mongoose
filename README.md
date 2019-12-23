@@ -155,7 +155,7 @@ module.exports = {
 The tests require Docker (version 1.10+) and Docker Compose (version 1.6.0+). Make sure you have installed both.
 
 ```
-docker pull mongo:3.2.4
+docker pull mongo:4.2
 npm test
 ```
 
