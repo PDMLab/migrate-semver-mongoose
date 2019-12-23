@@ -1,7 +1,7 @@
 'use strict';
 const assert = require('assert');
 const async = require('async');
-const compose = require('./helper/compose');
+const compose = require('docker-compose')
 const CustomerSchema = require('./migrations/none-0.1.0/0.1.0/schemas/customer');
 const CountrySchema = require('./migrations/none-0.2.0/0.2.0/schemas/country');
 const Migration = require('../schemas/migration');
@@ -12,21 +12,11 @@ const SemVerMigration = require('migrate-semver');
 const customCollectionName = 'custom.migrations';
 
 describe('Migrations', () => {
-  beforeEach(done => {
-    async.series([
-      awaits => {
-        compose.kill({ cwd: __dirname }, awaits);
-      },
-      awaits => {
-        compose.rm({ cwd: __dirname }, awaits);
-      },
-      awaits => {
-        compose.up({ cwd: __dirname }, awaits);
-      }
-    ], err => {
-      done(err);
+  beforeEach(async () => {
+    await compose.kill({ cwd: __dirname })
+    await compose.rm({ cwd: __dirname })
+    await compose.upAll({ cwd: __dirname })
     });
-  });
 
   describe('When connecting to a db via plugin', () => {
     it('should call connect via plugin', done => {
@@ -449,20 +439,10 @@ describe('Migrations', () => {
 });
 
 describe('Migrations with custom migrations collection name', () => {
-  beforeEach(done => {
-    async.series([
-      awaits => {
-        compose.kill({ cwd: __dirname }, awaits);
-      },
-      awaits => {
-        compose.rm({ cwd: __dirname }, awaits);
-      },
-      awaits => {
-        compose.up({ cwd: __dirname }, awaits);
-      }
-    ], err => {
-      done(err);
-    });
+  beforeEach(async () => {
+    await compose.kill({ cwd: __dirname })
+    await compose.rm({ cwd: __dirname })
+    await compose.upAll({ cwd: __dirname })
   });
 
   describe('When connecting to a db via plugin', () => {

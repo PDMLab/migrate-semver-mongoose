@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/PDMLab/migrate-semver-mongoose#readme",
   "devDependencies": {
+    "docker-compose": "^0.23.1",
     "eslint": "^3.3.1",
     "eslint-config-es": "^0.8.0",
     "eslint-plugin-extended": "^0.2.0",
