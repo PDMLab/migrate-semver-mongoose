@@ -167,7 +167,7 @@ If you want to contribute - we'd love it! Just open an issue to work against so 
 
 If you see a bug, please be so kind as to show how it's failing, and we'll do our best to get it fixed quickly.
 
-Before sending a PR, please [create an issue](https://github.com/PDMLab/composefile/issues/new) to introduce your idea and have a reference for your PR.
+Before sending a PR, please [create an issue](https://github.com/PDMLab/migrate-semver-mongoose/issues/new) to introduce your idea and have a reference for your PR.
 
 Also please add tests and make sure to run `npm run eslint`.
 
