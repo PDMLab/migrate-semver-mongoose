@@ -1,6 +1,6 @@
 {
   "name": "migrate-semver-mongoose",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "Mongoose plugin for migrate-semver",
   "main": "index.js",
   "scripts": {
