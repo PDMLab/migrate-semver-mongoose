@@ -29,7 +29,7 @@ const mongoosePlugin = function (pluginOptions) {
     config.mongoServer = options.mongoServer;
     const operation = retry.operation();
 
-    operation.attempt(() => conn = mongoose.createConnection(config.mongoServer, {useNewUrlParser: true, useUnifiedTopology: true}, err => { // eslint-disable-line no-return-assign
+    operation.attempt(() => conn = mongoose.createConnection(config.mongoServer, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true}, err => { // eslint-disable-line no-return-assign
       if (operation.retry(err)) {
         return;
       }
